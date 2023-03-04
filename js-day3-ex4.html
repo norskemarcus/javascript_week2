@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cars-r-us</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://icons8.com/icon/15126/car"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .parent {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1px 1px;
+      }
+      .item,
+      add-car {
+        background-color: lightskyblue;
+        border: 1px solid #fff;
+        padding: 5px 5px 5px 2em;
+        min-height: 250px;
+      }
+    </style>
+  </head>
+  <body style="font-family: sans-serif">
+    <div style="margin-left: 10%; width: 75%; margin-right: auto">
+      <h2>Car's 'R' Us Client Demo</h2>
+
+      <button id="btn-back">Go Back</button>
+
+      <div class="parent">
+        <div class="item">
+          <h3>Show all Cars</h3>
+          <button id="btn-get-all">Get all</button>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Price pr day</th>
+              </tr>
+            </thead>
+
+            <p id="p-error-cars" style="color: red"></p>
+
+            <tbody id="table-body-cars"></tbody>
+          </table>
+        </div>
+        <div class="item">
+          <h3>Find a single Car</h3>
+          <label for="text-for-id">Id</label>&nbsp;<input id="text-for-id" />
+          <button id="btn-find">Find</button>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Price pr day</th>
+              </tr>
+            </thead>
+
+            <tbody id="table-body-car">
+              <tr>
+                <td id="p-id"></td>
+                <td id="p-brand"></td>
+                <td id="p-model"></td>
+                <td id="p-price"></td>
+              </tr>
+            </tbody>
+          </table>
+          <p id="p-error" style="color: red"></p>
+        </div>
+
+        <!-- ADD A CAR ------------------------------------------------------------------>
+
+        <div class="item">
+          <h3>Add a Car</h3>
+
+          <div>
+            <label for="input-brand">Brand</label>&nbsp;<input
+              id="input-brand"
+            />
+          </div>
+          <div>
+            <label for="input-model">Model</label>&nbsp;<input
+              id="input-model"
+            />
+          </div>
+          <div>
+            <label for="input-price">Price pr day</label>&nbsp;<input
+              id="input-price"
+            />
+          </div>
+
+          <button id="submit-new-car">Submit new car</button>
+
+          <p id="car_added">Show returned data, if any</p>
+
+          <p>
+            Use one of the two GET pages to verify that "something" was added
+          </p>
+        </div>
+
+        <!-- EDIT A CAR ------------------------------------------------------------------>
+
+        <div class="item">
+          <h3>Edit a Car</h3>
+          <label for="text-for-id2">Id</label>&nbsp;<input id="text-for-id2" />
+          <button id="btn-find-car-to-edit">Find car to edit</button>
+
+          <div>
+            <label for="p-brand-edit">Edit brand</label>&nbsp;<input
+              id="p-brand-edit"
+            />
+          </div>
+          <div>
+            <label for="p-model-edit">Edit model</label>&nbsp;<input
+              id="p-model-edit"
+            />
+          </div>
+          <div>
+            <label for="p-price-edit">Edit price pr. day</label>&nbsp;<input
+              id="p-price-edit"
+            />
+          </div>
+
+          <button id="btn-edit-car">Submit edited car</button>
+
+          <p id="edited-car"></p>
+          <p id="error-edit-car"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="cars.js"></script>
+  </body>
+</html>

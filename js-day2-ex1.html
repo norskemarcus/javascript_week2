@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 2 - Ex. 1</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://icons8.com/icon/15126/car"
+    />
+    <style>
+      .color-box {
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        display: inline-block;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Ex. 1</h2>
+    <div id="1" class="color-box">&nbsp;</div>
+    <div id="2" class="color-box">&nbsp;</div>
+    <div id="3" class="color-box">&nbsp;</div>
+
+    <button id="btn-color">Change color</button>
+    <br />
+    <br />
+    <button id="btn-back">Go Back</button>
+
+    <script>
+      const divs = document.querySelectorAll(".color-box");
+
+      // Made it simple first myself and then with random colors in a chat with chatGPT :)
+      function changeColor() {
+        for (var i = 0; i < divs.length; i++) {
+          var randomColor =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
+          divs[i].style.backgroundColor = randomColor;
+        }
+      }
+
+      document.getElementById("btn-color").onclick = changeColor;
+
+      // Set the initial background color of the div elements to red
+      for (var i = 0; i < divs.length; i++) {
+        divs[i].style.backgroundColor = "red";
+      }
+
+      // Go back button
+      document.getElementById("btn-back").onclick = goBack;
+
+      function goBack() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

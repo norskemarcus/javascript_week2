@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 3 - ex 1 og 2</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://icons8.com/icon/15126/car"
+    />
+  </head>
+  <body>
+    <div
+      style="
+        margin-left: 10%;
+        width: 78%;
+        margin-right: auto;
+        font-family: sans-serif;
+      "
+    >
+      <h2>Day 3, Exercise 1 + 2</h2>
+      <h3>First fetch (GET only) demo</h3>
+      <p>
+        MAKE SURE to open developer tools in your browser and monitor the
+        request/responses made "under neath the surface"
+      </p>
+      <input id="input-id" type="text" placeholder="Enter id" />&nbsp
+      <button id="btn-get-user">Get user</button>
+      <button id="btn-get-all">Get all</button>
+
+      <div id="all-user-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody id="table-body-users"></tbody>
+        </table>
+      </div>
+
+      <div id="single-user-content">
+        <h3>Details</h3>
+        <p id="p-name"></p>
+        <p id="p-email"></p>
+        <p id="p-city"></p>
+        <p id="p-error" style="color: red"></p>
+      </div>
+    </div>
+
+    <button id="btn-back" style="margin-left: 2 em">Go Back</button>
+
+    <script>
+      const URL = "https://jsonplaceholder.typicode.com/users/";
+
+      document.getElementById("input-id").value = "";
+
+      document.getElementById("btn-get-all").onclick = fetchAllUsers;
+
+      function fetchAllUsers() {
+        fetch(URL)
+          .then((res) => res.json())
+          .then((users) => makeTable(users));
+      }
+
+      function makeTable(users) {
+        document.getElementById("p-error").innerText = "";
+        document.getElementById("input-id").value = "";
+
+        const tableRows = users
+          .map(
+            (users) => `
+          <tr>
+          <td>${users.name}</td>
+          <td>${users.email}</td>
+          <td>${users.city}</td>
+          </tr>`
+          )
+          .join(""); // Laver den om til en enkelt streng
+
+        document.getElementById("table-body-users").innerHTML = tableRows;
+      }
+
+      document.getElementById("btn-get-user").onclick = fetchUser;
+
+      function fetchUser(evt) {
+        // OBS fetch = asynkront, så man kan ikke bare hente fetch
+        const id = document.getElementById("input-id").value;
+        document.getElementById("p-error").innerText = "";
+
+        if (!id) {
+          return Promise.reject("User not found");
+          return;
+        }
+
+        document.getElementById("p-error").innerText = "";
+        // får promise i retur hvis bare fetch
+        //then: første: returner også en promise!
+
+        const res = fetch(URL + id)
+          .then((res) => {
+            if (!res.ok) {
+              return Promise.reject("User not found");
+            }
+            return res.json(); // Nu får jeg json, data = javascript object
+          })
+          .then((data) => {
+            document.getElementById("p-name").innerText = data.name;
+            document.getElementById("p-email").innerText = data.email;
+            document.getElementById("p-city").innerText = data.address.city;
+          })
+          .catch(
+            (error) => (document.getElementById("p-error").innerText = error)
+          );
+      }
+
+      // Go back button
+      document.getElementById("btn-back").onclick = goBack;
+
+      function goBack() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

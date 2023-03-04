@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 2 - Ex. 3</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://icons8.com/icon/15126/car"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Day 2 - Ex. 3</h2>
+
+    <div class="container" style="padding: 1em; font-family: sans-serif">
+      <button id="load-data-btn">Load Data</button>
+
+      <ul id="ul1"></ul>
+
+      <form>
+        <div class="form-group">
+          <input
+            id="name-input"
+            type="text"
+            placeholder="Enter new name here"
+          />
+        </div>
+        <button id="btn-b1">Add Name</button>
+        <button id="btn-b2">Remove First</button>
+        <button id="btn-b3">Remove Last</button>
+      </form>
+    </div>
+
+    <br />
+
+    <button id="btn-back">Go Back</button>
+
+    <script>
+      //Will eventually (day 4) come from a server-API
+      const names = ["Marcus", "Tommy", "Mark", "Sebastian", "Lars"];
+
+      function makeList() {
+        const list = names.map((n) => `<li>${encode(n)}</li>`).join("");
+        document.getElementById("ul1").innerHTML = list;
+      }
+
+      document.querySelector("#load-data-btn").onclick = () => makeList();
+
+      /* Manipulating the data, and then re-render the HTML */
+      document.getElementById("btn-b1").onclick = (evt) => {
+        evt.preventDefault();
+        const nameInput = document.getElementById("name-input");
+        const name = nameInput.value.trim();
+
+        if (name) {
+          names.push(encode(name));
+          makeList();
+          nameInput.value = "";
+        }
+      };
+
+      /*Shift = Remove first */
+      document.getElementById("btn-b2").onclick = (evt) => {
+        evt.preventDefault();
+        names.shift();
+        makeList();
+      };
+
+      /* Pop = Remove last */
+      document.getElementById("btn-b3").onclick = (evt) => {
+        evt.preventDefault();
+        names.pop();
+        makeList();
+      };
+
+      //Utility function you can use to escape "untrusted" data inputs
+      //Ref: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+      function encode(str) {
+        str = str.replace(/&/g, "&amp;");
+        str = str.replace(/>/g, "&gt;");
+        str = str.replace(/</g, "&lt;");
+        str = str.replace(/"/g, "&quot;");
+        str = str.replace(/'/g, "&#039;");
+        return str;
+      }
+
+      // Go back button
+      document.getElementById("btn-back").onclick = goBack;
+
+      function goBack() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

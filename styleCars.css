@@ -1,0 +1,18 @@
+#tbody {
+  min-height: 14 em;
+}
+
+#btn-back {
+  margin-top: 1em;
+}
+
+#error-edit-car {
+  color: red;
+}
+
+/* .pointer.active.desc:after {
+  content: "▲";
+}
+.pointer.active.asc:after {
+  content: "▼";
+} */
